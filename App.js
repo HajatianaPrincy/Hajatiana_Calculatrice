@@ -10,7 +10,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.edit}>
-        <TextInput style={styles.input}placeholder="Votre nombre"/>
+        <TextInput style={styles.input}/>
         <TouchableOpacity style={styles.point} onPress={() => {}}>
           <MaterialCommunityIcons name="dots-vertical" color="#000" size={24} />
         </TouchableOpacity>
@@ -18,16 +18,16 @@ export default function App() {
       
       <View style={styles.nbr}>
         <TouchableOpacity style={styles.btn} onPress={() => {}}>
-          <Text style={styles.sept}>√</Text>
+          <Text style={styles.racin}>√</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn} onPress={() => {}}>
-            <MaterialCommunityIcons name="pi" color="#000" />
+            <MaterialCommunityIcons name="pi" color="#000" style={styles.pi}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn} onPress={() => {}}>
-          <Text style={styles.neuf}>^</Text>
+          <Text style={styles.expo}>^</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn} onPress={() => {}}>
-          <Text style={styles.neuf}>!</Text>
+          <Text style={styles.exla}>!</Text>
         </TouchableOpacity>
       </View>
 
@@ -57,7 +57,7 @@ export default function App() {
           <Text style={styles.neuf}>9</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn} onPress={() => {}}>
-          <MaterialCommunityIcons name="multiplication" color="#000" />
+          <MaterialCommunityIcons name="multiplication" color="#000" style={styles.multi}/>
         </TouchableOpacity>
       </View>
 
@@ -72,7 +72,7 @@ export default function App() {
           <Text style={styles.six}>6</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn} onPress={() => {}}>
-          <Entypo name="minus" color="#000"/>
+          <Entypo name="minus" color="#000" style={styles.moin}/>
         </TouchableOpacity>
       </View>
 
@@ -87,7 +87,7 @@ export default function App() {
           <Text style={styles.trois}>3</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn} onPress={() => {}}>
-            <MaterialIcons name="add" color="#000"/>
+            <MaterialIcons name="add" color="#000" style={styles.add}/>
         </TouchableOpacity>
       </View>
 
@@ -99,7 +99,7 @@ export default function App() {
           <Text style={styles.virgule}>,</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn} onPress={() => {}}>
-          <Ionicons name="backspace-sharp" color="#000"/>
+          <Ionicons name="backspace-sharp" color="#000" style={styles.bs}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn} onPress={() => {}}>
           <Text style={styles.egal}>=</Text>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
 },
 
   input:{
-    height: 250,
+    height: 270,
     width: 330,
     borderColor: 'gray',
     borderWidth: 1,
@@ -167,14 +167,271 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  racin:{
+    width:60,
+    height:60,
+    left:-25,
+    fontSize:40,
+    borderRadius:50,
+    paddingLeft:13,
+    paddingTop:0,
+  },
+
+  pi:{
+    width:60,
+    height:60,
+    right:22,
+    fontSize:40,
+    borderRadius:50,
+    paddingLeft:23,
+    paddingTop:10,
+  },
+
+  expo:{
+    width:60,
+    height:60,
+    left:10,
+    fontSize:40,
+    borderRadius:50,
+    paddingLeft:23,
+    paddingTop:0,
+  },
+
+  exla:{
+    width:60,
+    height:60,
+    left:40,
+    fontSize:40,
+    borderRadius:50,
+    paddingLeft:17,
+    paddingTop:0,
+  },
+
   sup:{
     width:60,
     height:60,
     backgroundColor:'lightblue',
-    left:-100,
+    left:-30,
     fontSize:25,
     borderRadius:50,
     paddingLeft:13,
     paddingTop:10,
-  }
+  },
+
+  parenthese:{
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    right:10,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:22,
+    paddingTop:10,
+  },
+
+  pourcentage:{
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    left:10,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:22,
+    paddingTop:10,
+  },
+
+  division:{
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    left:30,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:17,
+    paddingTop:16,
+  },
+
+  sept:{
+    margin:10,
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    left:0,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:25,
+    paddingTop:10,
+  },
+
+  heuit:{
+    margin:10,
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    right:0,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:23,
+    paddingTop:10,
+  },
+
+  neuf:{
+    margin:10,
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    left:0,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:24,
+    paddingTop:10,
+  },
+
+  multi:{
+    margin:10,
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    left:0,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:17,
+    paddingTop:16,
+  },
+
+  quatre:{
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    right:30,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:23,
+    paddingTop:10,
+  },
+
+  cinq:{
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    right:10,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:23,
+    paddingTop:10,
+  },
+
+  six:{
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    left:10,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:23,
+    paddingTop:10,
+  },
+
+  moin:{
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    left:30,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:17,
+    paddingTop:16,
+  },
+
+  un:{
+    margin:10,
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    right:0,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:24,
+    paddingTop:10,
+  }, 
+
+  deux:{
+    margin:10,
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    right:0,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:23,
+    paddingTop:10,
+  },
+
+  trois:{
+    margin:10,
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    left:0,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:24,
+    paddingTop:10,
+  },
+
+  add:{
+    margin:10,
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    left:0,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:17,
+    paddingTop:16,
+  },
+
+  zero:{
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    right:30,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:23,
+    paddingTop:10,
+  },
+
+  virgule:{
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    right:10,
+    fontSize:40,
+    borderRadius:50,
+    paddingLeft:28,
+    paddingTop:0,
+  },
+
+  bs:{
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    left:10,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:18,
+    paddingTop:17,
+  },
+
+  egal:{
+    width:60,
+    height:60,
+    backgroundColor:'lightblue',
+    left:30,
+    fontSize:25,
+    borderRadius:50,
+    paddingLeft:23,
+    paddingTop:13,
+  },
 });
