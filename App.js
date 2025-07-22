@@ -11,20 +11,168 @@ export default function App() {
 
   const [inputValue, setInputValue] = useState('');
 
-  
+  const faireCalcul = (phrase) => {
+    let nbrOperaterFoisOuDivision = 0;
+    let nombre1 = '';
+    let nombre2 = '';
+    let nombre1EnSensNormal = '';
+    let resultatFoisOuDivision = 0;
+    let valeur = phrase;
+    let nombreOperation = 0;
+    let i = 0; 
+
+    // Compter le nombre d'opérateurs '*' ou '/' pour la première passe
+    for (let i = 0; i < valeur.length; i++) {
+      if (valeur[i] == '*' || valeur[i] == '/') {
+        nbrOperaterFoisOuDivision += 1;
+      }
+    }
+
+    // Effectuer les calculs de multiplication et de division en priorité
+    while (nbrOperaterFoisOuDivision > 0) {
+      let j = 0; // Indice de l'opérateur actuel
+      let k = 0; // Indice pour le premier nombre
+      let l = 0; // Indice pour le deuxième nombre
+
+      // Trouver le premier opérateur '*' ou '/'
+      for (j = 0; j < valeur.length; j++) {
+        if (valeur[j] == '*' || valeur[j] == '/') {
+          // Récupérer le premier nombre (avant l'opérateur)
+          for (k = j - 1; k >= 0; k--) {
+            if (valeur[k] == '*' || valeur[k] == '/' || valeur[k] == '+' || valeur[k] == '-') {
+              break;
+            }
+            nombre1 = nombre1 + valeur[k];
+          }
+          // Récupérer le deuxième nombre (après l'opérateur)
+          for (l = j + 1; l < valeur.length; l++) {
+            if (valeur[l] == '*' || valeur[l] == '/' || valeur[l] == '+' || valeur[l] == '-') {
+              break;
+            }
+            nombre2 = nombre2 + valeur[l];
+          }
+          break; // Sortir de la boucle une fois le premier opérateur trouvé
+        }
+      }
+
+      // Inverser le premier nombre car il a été construit à l'envers
+      nombre1EnSensNormal = nombre1.split('').reverse().join('');
+
+      // Effectuer l'opération et remplacer dans la chaîne
+      if (valeur[j] === '*') {
+        resultatFoisOuDivision = parseFloat(nombre1EnSensNormal) * parseFloat(nombre2);
+        // Remplacer l'opération par son résultat dans la chaîne
+        valeur = valeur.replace(nombre1EnSensNormal + '*' + nombre2, String(resultatFoisOuDivision));
+      } else if (valeur[j] == '/') {
+        if (parseFloat(nombre2) == 0) {
+          return "Erreur: Division par zéro"; // Gérer la division par zéro
+        }
+        resultatFoisOuDivision = parseFloat(nombre1EnSensNormal) / parseFloat(nombre2);
+        // Remplacer l'opération par son résultat dans la chaîne
+        valeur = valeur.replace(nombre1EnSensNormal + '/' + nombre2, String(resultatFoisOuDivision));
+      }
+
+      // Réinitialiser les variables pour la prochaine itération
+      nbrOperaterFoisOuDivision -= 1;
+      nombre1 = '';
+      nombre2 = '';
+      nombre1EnSensNormal = '';
+      resultatFoisOuDivision = 0;
+    }
+
+    // Maintenant, traiter les opérations restantes (+ et -)
+    // Compter le nombre total d'opérations restantes
+    for (let i = 0; i < valeur.length; i++) {
+      if (valeur[i] == '+' || valeur[i] == '-' || valeur[i] == '*' || valeur[i] == '/') {
+        nombreOperation += 1;
+      }
+    }
+
+    while (nombreOperation > 0) {
+      let m = 0; // Indice de l'opérateur actuel
+      let n = 0; // Indice pour le premier nombre
+      let o = 0; // Indice pour le deuxième nombre
+
+      // Trouver le premier opérateur (+, -, *, /) dans la chaîne restante
+      for (m = 0; m < valeur.length; m++) {
+        if (valeur[m] == '+' || valeur[m] == '-' || valeur[m] == '*' || valeur[m] == '/') {
+          // Récupérer le premier nombre
+          for (n = m - 1; n >= 0; n--) {
+            if (valeur[n] == '+' || valeur[n] == '-' || valeur[n] == '*' || valeur[n] == '/') {
+              break;
+            }
+            nombre1 = nombre1 + valeur[n];
+          }
+          // Récupérer le deuxième nombre
+          for (o = m + 1; o < valeur.length; o++) {
+            if (valeur[o] == '+' || valeur[o] == '-' || valeur[o] == '*' || valeur[o] == '/') {
+              break;
+            }
+            nombre2 = nombre2 + valeur[o];
+          }
+          break; // Sortir de la boucle une fois le premier opérateur trouvé
+        }
+      }
+
+      // Inverser le premier nombre
+      nombre1EnSensNormal = nombre1.split('').reverse().join('');
+
+      // Effectuer l'opération
+      if (valeur[m] == '+') {
+        resultatFoisOuDivision = parseFloat(nombre1EnSensNormal) + parseFloat(nombre2);
+        valeur = valeur.replace(nombre1EnSensNormal + '+' + nombre2, String(resultatFoisOuDivision));
+      } else if (valeur[m] == '-') {
+        resultatFoisOuDivision = parseFloat(nombre1EnSensNormal) - parseFloat(nombre2);
+        valeur = valeur.replace(nombre1EnSensNormal + '-' + nombre2, String(resultatFoisOuDivision));
+      } else if (valeur[m] == '*') { // Ces cas sont ici pour la cohérence, mais devraient déjà être traités par la première boucle
+        resultatFoisOuDivision = parseFloat(nombre1EnSensNormal) * parseFloat(nombre2);
+        valeur = valeur.replace(nombre1EnSensNormal + '*' + nombre2, String(resultatFoisOuDivision));
+      } else if (valeur[m] == '/') { // Ces cas sont ici pour la cohérence, mais devraient déjà être traités par la première boucle
+        if (parseFloat(nombre2) === 0) {
+          return "Erreur: Division par zéro"; // Gérer la division par zéro
+        }
+        resultatFoisOuDivision = parseFloat(nombre1EnSensNormal) / parseFloat(nombre2);
+        valeur = valeur.replace(nombre1EnSensNormal + '/' + nombre2, String(resultatFoisOuDivision));
+      }
+
+      // Réinitialiser les variables pour la prochaine itération
+      nombre1 = '';
+      nombre2 = '';
+      nombre1EnSensNormal = '';
+      resultatFoisOuDivision = 0;
+      nombreOperation -= 1;
+    }
+    return valeur; // Retourner le résultat final
+  };
+
+  /**
+   * Gère l'affichage des valeurs dans l'entrée de la calculatrice et déclenche le calcul.
+   * @param {string} value La valeur du bouton pressé.
+   */
   const Afficher = (value) => {
     if (value == 'AC') {
+      // Effacer l'entrée
       setInputValue('');
-    }
-
-    else if (value == 'BS') {
+    } else if (value == 'BS') {
+      // Supprimer le dernier caractère
       setInputValue(prevValue => prevValue.slice(0, -1));
-    }
-
-    else {
+    } else if (value == '=') {
+      // Si '=' est pressé, effectuer le calcul
+      try {
+        const result = faireCalcul(inputValue);
+        setInputValue(String(result));
+      } catch (error) {
+        // Gérer les erreurs de calcul
+        setInputValue('Erreur');
+        console.error("Erreur de calcul:", error);
+      }
+    } else {
+      // Ajouter la valeur au champ d'entrée
       setInputValue(prevValue => prevValue + value);
     }
   };
+  
+
 
   return (
     <View style={styles.container}>
@@ -39,8 +187,8 @@ export default function App() {
           <MaterialCommunityIcons name="dots-vertical" color="#000" size={24} />
         </TouchableOpacity>
       </View>
+      
       <View style={styles.nbr}>
-
         <TouchableOpacity style={styles.btn} onPress={() => Afficher('√')}>
           <Text style={styles.racin}>√</Text>
         </TouchableOpacity>
@@ -54,6 +202,7 @@ export default function App() {
           <Text style={styles.exla}>!</Text>
         </TouchableOpacity>
       </View>
+
 
       <View style={styles.actions}>
         <TouchableOpacity style={styles.btn} onPress={() => Afficher('AC')}> 
